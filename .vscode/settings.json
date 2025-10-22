@@ -1,0 +1,72 @@
+{
+  // ==========================================
+  // CONFIGURACIÓN DE PYTHON
+  // ==========================================
+
+  // Ruta al intérprete de Python del entorno virtual
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python.exe",
+
+  // Activar automáticamente el entorno virtual en la terminal
+  "python.terminal.activateEnvironment": true,
+
+  // Configuración de linting
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+
+  // Formateo con Black
+  "python.formatting.provider": "black",
+
+  // ==========================================
+  // CONFIGURACIÓN DE TERMINAL (IMPORTANTE)
+  // ==========================================
+
+  // Usar CMD en lugar de PowerShell para evitar problemas de activación
+  // En los computadores de los estudiantes, venv se activa con activate.bat (CMD)
+  // NO con Activate.ps1 (PowerShell)
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+
+  // Configuración de perfiles de terminal
+  "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+      "path": ["${env:windir}\\System32\\cmd.exe"],
+      "icon": "terminal-cmd"
+    },
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  },
+
+  // Activación automática del entorno virtual en CMD
+  "python.terminal.activateEnvInCurrentTerminal": true,
+
+  // ==========================================
+  // CONFIGURACIÓN DEL EDITOR
+  // ==========================================
+
+  // Formatear al guardar
+  "editor.formatOnSave": true,
+
+  // Regla de ancho de línea (PEP 8)
+  "editor.rulers": [88],
+
+  // ==========================================
+  // ARCHIVOS Y CARPETAS A OCULTAR
+  // ==========================================
+
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true
+  },
+
+  // ==========================================
+  // CONFIGURACIÓN ESPECÍFICA DE PYTHON
+  // ==========================================
+
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}

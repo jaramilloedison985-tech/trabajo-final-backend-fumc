@@ -1,0 +1,101 @@
+{
+  "info": {
+    "name": "API FUMC - Auditoría",
+    "description": "Colección de endpoints para consultar el historial de auditoría.\n\n📊 ENDPOINTS INCLUIDOS:\n- GET /auditoria/ - Listar todo el historial\n- GET /auditoria/grupo/{grupo} - Historial de un grupo\n- GET /auditoria/tabla/{tabla} - Historial de una tabla\n- GET /auditoria/operacion/{operacion} - Historial por operación\n- GET /auditoria/registro/{tabla}/{id} - Historial de un registro\n\n💡 USO RECOMENDADO:\nEsta sección es útil para:\n- Ver qué cambios hizo cada grupo\n- Rastrear modificaciones en productos/clientes\n- Aprender cómo funciona un sistema de auditoría",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1️⃣ Listar Todo el Historial",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auditoria/?skip=0&limit=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auditoria", ""],
+          "query": [
+            {
+              "key": "skip",
+              "value": "0",
+              "description": "Saltar N registros (paginación)"
+            },
+            {
+              "key": "limit",
+              "value": "50",
+              "description": "Máximo de registros a devolver"
+            }
+          ]
+        },
+        "description": "**Lista TODO el historial de auditoría.**\n\n📋 Muestra todas las operaciones (CREATE, UPDATE, DELETE) de todos los grupos.\n\n🔍 Query Params opcionales:\n- `skip`: Paginación (default: 0)\n- `limit`: Máximo de resultados (default: 100)\n\n✅ Respuesta: Array de registros de auditoría ordenados por fecha (más reciente primero)\n\n💡 TIP: Usa `limit` pequeño para evitar respuestas muy grandes."
+      },
+      "response": []
+    },
+    {
+      "name": "2️⃣ Historial de un Grupo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auditoria/grupo/GRUPO_1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auditoria", "grupo", "GRUPO_1"]
+        },
+        "description": "**Lista el historial de operaciones de un grupo específico.**\n\n👥 Cambia `GRUPO_1` en la URL por el nombre del grupo que quieres consultar.\n\n🔍 Muestra TODO lo que ese grupo ha hecho:\n- Productos creados\n- Clientes modificados\n- Registros eliminados\n\n✅ Respuesta: Array de operaciones del grupo ordenadas por fecha\n\n💡 USO: El instructor puede ver qué hizo cada grupo."
+      },
+      "response": []
+    },
+    {
+      "name": "3️⃣ Historial de una Tabla",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auditoria/tabla/productos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auditoria", "tabla", "productos"]
+        },
+        "description": "**Lista el historial de operaciones en una tabla específica.**\n\n📦 Valores posibles para la URL:\n- `productos`: Ver solo cambios en productos\n- `clientes`: Ver solo cambios en clientes\n\n🔍 Muestra TODAS las operaciones en esa tabla (de todos los grupos).\n\n✅ Respuesta: Array de operaciones en esa tabla ordenadas por fecha\n\n💡 USO: Ver cómo ha evolucionado el inventario de productos o la lista de clientes."
+      },
+      "response": []
+    },
+    {
+      "name": "4️⃣ Historial por Tipo de Operación",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auditoria/operacion/CREATE",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auditoria", "operacion", "CREATE"]
+        },
+        "description": "**Lista el historial de un tipo de operación específica.**\n\n⚙️ Valores posibles para la URL:\n- `CREATE`: Solo creaciones de productos/clientes\n- `UPDATE`: Solo actualizaciones\n- `DELETE`: Solo eliminaciones (lógicas)\n\n🔍 Muestra TODAS las operaciones de ese tipo (de todos los grupos y tablas).\n\n✅ Respuesta: Array de operaciones del tipo especificado\n\n💡 EJEMPLOS DE USO:\n- `CREATE`: Ver qué productos/clientes se han agregado\n- `UPDATE`: Ver qué se ha modificado\n- `DELETE`: Ver qué se ha eliminado"
+      },
+      "response": []
+    },
+    {
+      "name": "5️⃣ Historial de un Registro Específico",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/auditoria/registro/productos/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["auditoria", "registro", "productos", "1"]
+        },
+        "description": "**Lista el historial completo de un producto o cliente específico.**\n\n🔢 Formato de la URL:\n- `/auditoria/registro/{tabla}/{id}`\n- `tabla`: `productos` o `clientes`\n- `id`: El ID del registro\n\n📜 EJEMPLO:\n- `/auditoria/registro/productos/5`: Historial del producto con ID 5\n- `/auditoria/registro/clientes/3`: Historial del cliente con ID 3\n\n🔍 Muestra TODA la vida del registro:\n1. Cuándo se creó y quién lo creó\n2. Todas las modificaciones con datos antes/después\n3. Si se eliminó y quién lo eliminó\n\n✅ Respuesta: Array cronológico de todas las operaciones sobre ese registro\n\n💡 USO: Rastrear completamente la historia de un producto o cliente.\n\n🎯 MUY ÚTIL PARA:\n- Recuperar datos si algo se modificó por error\n- Ver quién cambió el precio de un producto\n- Auditoría completa de un registro"
+      },
+      "response": []
+    }
+  ]
+}
