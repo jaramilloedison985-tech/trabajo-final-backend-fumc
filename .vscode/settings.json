@@ -9,6 +9,9 @@
   // Activar automáticamente el entorno virtual en la terminal
   "python.terminal.activateEnvironment": true,
 
+  // Activación automática del entorno virtual en CMD
+  "python.terminal.activateEnvInCurrentTerminal": true,
+
   // Configuración de linting
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,

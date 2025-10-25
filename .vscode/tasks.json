@@ -4,101 +4,27 @@
   "version": "2.0.0",
   "tasks": [
     {
-      // ✨ Tarea 1: Instalar dependencias automáticamente
-      "label": "Instalar Dependencias",
+      "label": "install-dependencies",
       "type": "shell",
+      "command": "${workspaceFolder}/venv/Scripts/python.exe",
+      "args": ["-m", "pip", "install", "-r", "requirements.txt"],
       "windows": {
-        // En Windows CMD (activate.bat)
-        // Activa el entorno virtual y luego instala dependencias
-  "command": "if not exist venv ( python -m venv venv ) && call venv\\Scripts\\activate.bat && python -m pip install --upgrade pip --quiet && python -m pip install -r requirements.txt --quiet"
+        "command": "${workspaceFolder}/venv/Scripts/python.exe"
       },
       "linux": {
-        // En Linux/Mac
-  "command": "if [ ! -d \"venv\" ]; then python -m venv venv; fi && . venv/bin/activate && python -m pip install --upgrade pip --quiet && python -m pip install -r requirements.txt --quiet"
+        "command": "${workspaceFolder}/venv/bin/python"
       },
       "osx": {
-        // En macOS
-  "command": "if [ ! -d \"venv\" ]; then python -m venv venv; fi && . venv/bin/activate && python -m pip install --upgrade pip --quiet && python -m pip install -r requirements.txt --quiet"
+        "command": "${workspaceFolder}/venv/bin/python"
       },
-      "options": {
-        "shell": {
-          "executable": "cmd.exe",
-          "args": ["/d", "/c"]
-        }
-      },
-      "presentation": {
-        // Configuración de cómo se muestra la salida
-        "echo": true, // Mostrar el comando ejecutado
-        "reveal": "silent", // No abrir el panel de salida automáticamente
-        "focus": false, // No poner foco en el panel
-        "panel": "shared", // Usar panel compartido
-        "showReuseMessage": false,
-        "clear": false
-      },
-      "problemMatcher": [],
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-      // ℹ️ EXPLICACIÓN:
-      // Esta tarea hace tres cosas:
-      // 1. Activa el entorno virtual con activate.bat (CMD)
-      // 2. Actualiza pip a la última versión (--quiet para no mostrar mucha salida)
-      // 3. Instala todas las dependencias de requirements.txt
-      //
-      // Se ejecuta AUTOMÁTICAMENTE antes de iniciar la API (configurado en launch.json)
-      //
-      // ⚠️ IMPORTANTE: Usa CMD (activate.bat) en lugar de PowerShell (Activate.ps1)
-      // porque en los computadores de los estudiantes funciona mejor activate.bat
-      //
-      // Si las dependencias ya están instaladas, el comando es muy rápido.
-      // Solo instalará las que falten o necesiten actualización.
-      //
-      // ✅ VENTAJAS:
-      // - Los estudiantes NO necesitan ejecutar pip install manualmente
-      // - Siempre tienen las dependencias actualizadas
-      // - Evita errores de "ModuleNotFoundError"
-      // - Compatible con CMD (activate.bat)
-    },
-    {
-      // 🧹 Tarea 2: Limpiar archivos __pycache__ (opcional)
-      "label": "Limpiar Cache Python",
-      "type": "shell",
-      "windows": {
-        "command": "for /d /r . %d in (__pycache__) do @if exist \"%d\" rd /s /q \"%d\" & del /s /q *.pyc 2>nul"
-      },
-      "options": {
-        "shell": {
-          "executable": "cmd.exe",
-          "args": ["/d", "/c"]
-        }
-      },
-      "linux": {
-        "command": "find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true; find . -type f -name '*.pyc' -delete 2>/dev/null || true"
-      },
-      "osx": {
-        "command": "find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true; find . -type f -name '*.pyc' -delete 2>/dev/null || true"
-      },
+      "group": "build",
       "presentation": {
         "echo": true,
-        "reveal": "silent",
+        "reveal": "always",
         "focus": false,
-        "panel": "shared",
-        "showReuseMessage": false
+        "panel": "shared"
       },
-      "problemMatcher": [],
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-      // ℹ️ EXPLICACIÓN:
-      // Esta tarea elimina archivos temporales de Python (__pycache__ y .pyc)
-      // Es útil cuando hay problemas con módulos que no se actualizan.
-      //
-      // Para ejecutarla manualmente:
-      // 1. Ctrl+Shift+P
-      // 2. "Tasks: Run Task"
-      // 3. Seleccionar "Limpiar Cache Python"
+      "problemMatcher": []
     },
     {
       // 🔍 Tarea 3: Verificar configuración del entorno

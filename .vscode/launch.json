@@ -19,7 +19,7 @@
         // pero puedes sobreescribirlas aquí si es necesario
       },
       // ✨ TAREA PREVIA: Instala dependencias automáticamente antes de ejecutar
-      "preLaunchTask": "Instalar Dependencias",
+      "preLaunchTask": "install-dependencies",
       "presentation": {
         "hidden": false,
         "group": "API",
