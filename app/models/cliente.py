@@ -10,6 +10,7 @@ Cada instancia de esta clase es un cliente de la tienda virtual.
 
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
 from sqlalchemy.sql import text
+from typing import Any
 from ..database import Base
 
 
@@ -162,7 +163,7 @@ class Cliente(Base):
             f"<Cliente(id={self.id}, nombre='{self.nombre}', " f"email='{self.email}')>"
         )
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         """
         Convierte el objeto Cliente a un diccionario.
         Útil para serializar a JSON.

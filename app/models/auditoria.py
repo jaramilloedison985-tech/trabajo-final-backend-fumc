@@ -11,6 +11,7 @@ Es como un "libro de registro" donde queda escrito quién hizo qué y cuándo.
 
 from sqlalchemy import Column, Integer, String, DateTime, Text
 from sqlalchemy.sql import text
+from typing import Any
 from ..database import Base
 
 
@@ -181,7 +182,7 @@ class HistorialAuditoria(Base):
             f")>"
         )
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         """
         Convierte el objeto HistorialAuditoria a un diccionario.
         Útil para serializar a JSON en las respuestas de la API.

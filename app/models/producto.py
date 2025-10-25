@@ -10,6 +10,7 @@ Cada instancia de esta clase es un producto en la tienda virtual.
 
 from sqlalchemy import Column, Integer, String, Numeric, Boolean, DateTime, Text
 from sqlalchemy.sql import text
+from typing import Any
 from ..database import Base
 
 
@@ -160,7 +161,7 @@ class Producto(Base):
             f"precio={self.precio}, stock={self.stock})>"
         )
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         """
         Convierte el objeto Producto a un diccionario.
         Útil para serializar a JSON o para debugging.
