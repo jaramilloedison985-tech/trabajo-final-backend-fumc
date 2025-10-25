@@ -9,7 +9,7 @@ Cada instancia de esta clase es un cliente de la tienda virtual.
 """
 
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
-from sqlalchemy.sql import func
+from sqlalchemy.sql import text
 from ..database import Base
 
 
@@ -123,17 +123,17 @@ class Cliente(Base):
 
     fecha_creacion = Column(
         DateTime(timezone=True),  # Incluye zona horaria
-        server_default=func.now(),  # PostgreSQL pone la fecha automáticamente
+        server_default=text("NOW()"),  # PostgreSQL pone fecha automáticamente
         nullable=False,
-        comment="Fecha y hora de creación del registro"
+        comment="Fecha y hora de creación del registro",
     )
 
     fecha_actualizacion = Column(
         DateTime(timezone=True),
-        server_default=func.now(),  # Fecha inicial
-        onupdate=func.now(),  # Se actualiza automáticamente al modificar
+        server_default=text("NOW()"),  # Fecha inicial
+        onupdate=text("NOW()"),  # Se actualiza automáticamente al modificar
         nullable=False,
-        comment="Fecha y hora de última actualización"
+        comment="Fecha y hora de última actualización",
     )
 
     grupo_creador = Column(
@@ -158,7 +158,9 @@ class Cliente(Base):
         Returns:
             str: Representación legible del cliente
         """
-        return f"<Cliente(id={self.id}, nombre='{self.nombre}', email='{self.email}')>"
+        return (
+            f"<Cliente(id={self.id}, nombre='{self.nombre}', " f"email='{self.email}')>"
+        )
 
     def to_dict(self):
         """
@@ -177,8 +179,16 @@ class Cliente(Base):
             "ciudad": self.ciudad,
             "documento": self.documento,
             "activo": self.activo,
-            "fecha_creacion": self.fecha_creacion.isoformat() if self.fecha_creacion else None,
-            "fecha_actualizacion": self.fecha_actualizacion.isoformat() if self.fecha_actualizacion else None,
+            "fecha_creacion": (
+                self.fecha_creacion.isoformat()
+                if self.fecha_creacion is not None  # type: ignore
+                else None
+            ),
+            "fecha_actualizacion": (
+                self.fecha_actualizacion.isoformat()
+                if self.fecha_actualizacion is not None  # type: ignore
+                else None
+            ),
             "grupo_creador": self.grupo_creador,
-            "grupo_ultima_modificacion": self.grupo_ultima_modificacion
+            "grupo_ultima_modificacion": self.grupo_ultima_modificacion,
         }

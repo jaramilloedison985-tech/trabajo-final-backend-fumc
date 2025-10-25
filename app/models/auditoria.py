@@ -10,7 +10,7 @@ Es como un "libro de registro" donde queda escrito quién hizo qué y cuándo.
 """
 
 from sqlalchemy import Column, Integer, String, DateTime, Text
-from sqlalchemy.sql import func
+from sqlalchemy.sql import text
 from ..database import Base
 
 
@@ -146,10 +146,10 @@ class HistorialAuditoria(Base):
 
     fecha_operacion = Column(
         DateTime(timezone=True),  # Incluye zona horaria
-        server_default=func.now(),  # PostgreSQL pone la fecha automáticamente
+        server_default=text("NOW()"),  # PostgreSQL pone fecha automáticamente
         nullable=False,
-        index=True,       # Índice para ordenar por fecha
-        comment="Fecha y hora de la operación"
+        index=True,  # Índice para ordenar por fecha
+        comment="Fecha y hora de la operación",
     )
     # Se registra automáticamente cuando se crea el registro de auditoría.
 
@@ -197,6 +197,10 @@ class HistorialAuditoria(Base):
             "grupo_responsable": self.grupo_responsable,
             "datos_anteriores": self.datos_anteriores,
             "datos_nuevos": self.datos_nuevos,
-            "fecha_operacion": self.fecha_operacion.isoformat() if self.fecha_operacion else None,
-            "observaciones": self.observaciones
+            "fecha_operacion": (
+                self.fecha_operacion.isoformat()
+                if self.fecha_operacion is not None  # type: ignore
+                else None
+            ),
+            "observaciones": self.observaciones,
         }

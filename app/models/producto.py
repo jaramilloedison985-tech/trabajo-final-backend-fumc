@@ -9,7 +9,7 @@ Cada instancia de esta clase es un producto en la tienda virtual.
 """
 
 from sqlalchemy import Column, Integer, String, Numeric, Boolean, DateTime, Text
-from sqlalchemy.sql import func
+from sqlalchemy.sql import text
 from ..database import Base
 
 
@@ -119,17 +119,17 @@ class Producto(Base):
 
     fecha_creacion = Column(
         DateTime(timezone=True),  # Incluye zona horaria
-        server_default=func.now(),  # PostgreSQL pone la fecha automáticamente
+        server_default=text("NOW()"),  # PostgreSQL pone fecha automáticamente
         nullable=False,
-        comment="Fecha y hora de creación del registro"
+        comment="Fecha y hora de creación del registro",
     )
 
     fecha_actualizacion = Column(
         DateTime(timezone=True),
-        server_default=func.now(),  # Fecha inicial
-        onupdate=func.now(),  # Se actualiza automáticamente al modificar
+        server_default=text("NOW()"),  # Fecha inicial
+        onupdate=text("NOW()"),  # Se actualiza automáticamente al modificar
         nullable=False,
-        comment="Fecha y hora de última actualización"
+        comment="Fecha y hora de última actualización",
     )
 
     grupo_creador = Column(
@@ -155,7 +155,10 @@ class Producto(Base):
         Returns:
             str: Representación legible del producto
         """
-        return f"<Producto(id={self.id}, nombre='{self.nombre}', precio={self.precio}, stock={self.stock})>"
+        return (
+            f"<Producto(id={self.id}, nombre='{self.nombre}', "
+            f"precio={self.precio}, stock={self.stock})>"
+        )
 
     def to_dict(self):
         """
@@ -169,13 +172,25 @@ class Producto(Base):
             "id": self.id,
             "nombre": self.nombre,
             "descripcion": self.descripcion,
-            "precio": float(self.precio) if self.precio else None,
+            "precio": (
+                float(self.precio)  # type: ignore
+                if self.precio is not None  # type: ignore
+                else None
+            ),
             "stock": self.stock,
             "categoria": self.categoria,
             "imagen_url": self.imagen_url,
             "activo": self.activo,
-            "fecha_creacion": self.fecha_creacion.isoformat() if self.fecha_creacion else None,
-            "fecha_actualizacion": self.fecha_actualizacion.isoformat() if self.fecha_actualizacion else None,
+            "fecha_creacion": (
+                self.fecha_creacion.isoformat()
+                if self.fecha_creacion is not None  # type: ignore
+                else None
+            ),
+            "fecha_actualizacion": (
+                self.fecha_actualizacion.isoformat()
+                if self.fecha_actualizacion is not None  # type: ignore
+                else None
+            ),
             "grupo_creador": self.grupo_creador,
-            "grupo_ultima_modificacion": self.grupo_ultima_modificacion
+            "grupo_ultima_modificacion": self.grupo_ultima_modificacion,
         }

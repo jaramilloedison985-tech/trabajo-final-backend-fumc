@@ -51,7 +51,7 @@
   "editor.formatOnSave": true,
 
   // Regla de ancho de línea (PEP 8)
-  "editor.rulers": [88],
+  "editor.rulers": [80],
 
   // ==========================================
   // ARCHIVOS Y CARPETAS A OCULTAR
