@@ -9,6 +9,7 @@
 ## 📋 Tabla de Contenidos
 
 - [Descripción](#-descripción)
+- [🎯 Retos y Evaluación](#-retos-y-evaluación-del-proyecto)
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 - [Características](#-características)
 - [Requisitos Previos](#-requisitos-previos)
@@ -759,7 +760,54 @@ GET /productos/?categoria=Electrónica&limit=10
 
 ---
 
-## 🎓 Conceptos Aprendidos
+## � Retos y Evaluación del Proyecto
+
+Este proyecto se evalúa mediante el **sistema de auditoría** en la base de datos. NO necesitas subir código a GitHub.
+
+### 📚 Documentos Importantes
+
+1. **`RETOS_ESTUDIANTES.md`** - 🎯 **LEE ESTO PRIMERO**
+   - Define los retos que debes completar (4 niveles)
+   - Sistema de puntaje detallado (100 puntos)
+   - Todas tus operaciones quedan registradas en la BD
+   - La evaluación es 100% basada en auditoría
+
+2. **`RUBRICA_EVALUACION.md`** - 📊 Para el instructor
+   - Criterios de evaluación detallados
+   - Queries SQL para verificar cada reto
+   - Sistema de calificación objetivo
+
+3. **`GUIA_CALIFICACION.md`** - ⚡ Para el instructor
+   - Guía rápida de evaluación
+   - Scripts automatizados de SQL
+   - Proceso paso a paso
+
+### 🎯 Cómo Funciona la Evaluación
+
+1. **Configuras tu grupo** en el archivo `.env`:
+   ```env
+   GRUPO_ESTUDIANTES=GRUPO_1  # TU IDENTIFICADOR
+   ```
+
+2. **Realizas operaciones** usando la API:
+   - Crear productos y clientes
+   - Actualizar registros
+   - Eliminar registros (soft delete)
+   - Consultar auditoría
+
+3. **TODO queda registrado** en la tabla `historial_auditoria`:
+   - Qué grupo lo hizo
+   - Qué operación (CREATE/UPDATE/DELETE)
+   - Cuándo lo hizo
+   - Qué datos cambió
+
+4. **El instructor revisa la BD** y califica según los retos completados
+
+**📖 Detalles completos en**: `RETOS_ESTUDIANTES.md`
+
+---
+
+## �🎓 Conceptos Aprendidos
 
 Al completar este proyecto habrás trabajado con:
 

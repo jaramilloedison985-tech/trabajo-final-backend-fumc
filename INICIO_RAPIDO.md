@@ -219,7 +219,48 @@ taskkill /PID <PID> /F
 
 ---
 
-## 🎓 Flujo de Trabajo Típico
+## � Retos del Proyecto
+
+**⚠️ IMPORTANTE**: Este proyecto NO se evalúa con código subido a GitHub.
+
+### ¿Cómo se Evalúa?
+
+✅ **Todas tus operaciones quedan registradas** en la base de datos  
+✅ **El instructor revisa la auditoría** para ver qué hizo cada grupo  
+✅ **Sistema de puntaje objetivo** basado en los registros
+
+### 📖 Lee los Retos
+
+**Archivo principal**: `RETOS_ESTUDIANTES.md`
+
+Este archivo contiene:
+- 🎯 **4 niveles de retos** (Básico → Avanzado)
+- 📊 **100 puntos totales**
+- 📝 **Criterios claros** de evaluación
+- 💡 **Ejemplos** de cada reto
+
+### ¿Qué Debes Hacer?
+
+1. **Configurar tu grupo** en `.env`:
+   ```env
+   GRUPO_ESTUDIANTES=GRUPO_1  # Cambia esto por tu grupo
+   ```
+
+2. **Completar los retos** usando la API:
+   - Crear productos y clientes
+   - Hacer búsquedas y filtros
+   - Actualizar registros
+   - Consultar auditoría
+
+3. **TODO queda registrado** automáticamente
+
+4. **El instructor califica** revisando la base de datos
+
+**📚 Lee los detalles completos en**: `RETOS_ESTUDIANTES.md`
+
+---
+
+## �🎓 Flujo de Trabajo Típico
 
 ```
 1. Abrir VS Code
