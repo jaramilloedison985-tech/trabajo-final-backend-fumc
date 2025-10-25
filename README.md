@@ -190,7 +190,7 @@ Este comando instalará:
    DB_PORT=5432
    DB_NAME=fumc_db
    DB_USER=fumc_user
-   DB_PASSWORD=FUMC*Backend.Oct-2025
+   DB_PASSWORD=
 
    # ⚠️ IMPORTANTE: Cambia esto por el nombre de tu grupo
    GRUPO_ESTUDIANTES=GRUPO_1
