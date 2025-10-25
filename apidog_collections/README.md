@@ -1,6 +1,8 @@
 # 📁 Colecciones de ApiDog para API FUMC
 
-Esta carpeta contiene las colecciones de API pre-configuradas para ApiDog (o Postman).
+Esta carpeta contiene las colecciones de API pre-configuradas para **ApiDog**.
+
+> 💡 **¿Prefieres Postman?** También hay colecciones en la carpeta `postman_collections/`
 
 ## 📦 Archivos Incluidos
 
@@ -53,7 +55,9 @@ Esta carpeta contiene las colecciones de API pre-configuradas para ApiDog (o Pos
 
 ## 🚀 Cómo Importar en Postman
 
-Los archivos JSON también son compatibles con **Postman**:
+> ℹ️ **Nota**: Si usas Postman, te recomendamos usar las colecciones de la carpeta `postman_collections/` que están específicamente optimizadas para Postman.
+
+También puedes importar estos archivos en **Postman**:
 
 1. Abre **Postman**
 2. Haz clic en **"Import"** (esquina superior izquierda)

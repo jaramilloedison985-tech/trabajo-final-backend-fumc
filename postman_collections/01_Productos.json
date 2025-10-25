@@ -1,0 +1,168 @@
+{
+  "info": {
+    "name": "API FUMC - Productos",
+    "description": "Colección de endpoints para gestionar productos de la tienda virtual.\n\n📦 ENDPOINTS INCLUIDOS:\n- POST /productos/ - Crear producto\n- GET /productos/ - Listar productos (con filtros)\n- GET /productos/{id} - Obtener producto por ID\n- PUT /productos/{id} - Actualizar producto\n- DELETE /productos/{id} - Eliminar producto (lógico)\n- GET /productos/buscar/nombre - Buscar por nombre",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1️⃣ Crear Producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop HP Pavilion\",\n  \"descripcion\": \"Laptop HP Pavilion 15.6 pulgadas, Intel Core i5, 8GB RAM, 256GB SSD\",\n  \"precio\": 1899000,\n  \"stock\": 15,\n  \"categoria\": \"Electrónica\",\n  \"imagen_url\": \"https://example.com/images/laptop-hp.jpg\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/productos/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", ""]
+        },
+        "description": "**Crea un nuevo producto en la base de datos.**\n\n📝 Campos:\n- `nombre` (obligatorio): Nombre del producto\n- `descripcion` (opcional): Descripción detallada\n- `precio` (obligatorio): Precio en COP (debe ser > 0)\n- `stock` (obligatorio): Cantidad disponible (>= 0)\n- `categoria` (opcional): Categoría del producto\n- `imagen_url` (opcional): URL de la imagen\n\n✅ Respuesta exitosa: HTTP 201 con el producto creado\n❌ Errores comunes:\n- 422: Datos inválidos (precio negativo, stock negativo, etc.)"
+      },
+      "response": []
+    },
+    {
+      "name": "2️⃣ Listar Productos (Todos)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/productos/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", ""]
+        },
+        "description": "**Lista TODOS los productos activos.**\n\n🔍 Sin filtros, devuelve todos los productos donde `activo = true`.\n\n✅ Respuesta: Array de productos"
+      },
+      "response": []
+    },
+    {
+      "name": "3️⃣ Listar Productos (Con Filtros)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/productos/?categoria=Electrónica&activo=true&skip=0&limit=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", ""],
+          "query": [
+            {
+              "key": "categoria",
+              "value": "Electrónica",
+              "description": "Filtrar por categoría"
+            },
+            {
+              "key": "activo",
+              "value": "true",
+              "description": "Mostrar solo activos (true) o inactivos (false)"
+            },
+            {
+              "key": "skip",
+              "value": "0",
+              "description": "Saltar N productos (para paginación)"
+            },
+            {
+              "key": "limit",
+              "value": "10",
+              "description": "Máximo de productos a devolver"
+            }
+          ]
+        },
+        "description": "**Lista productos con filtros opcionales.**\n\n🔍 Query Params:\n- `categoria`: Filtrar por categoría exacta\n- `activo`: true o false\n- `skip`: Paginación (saltar N)\n- `limit`: Máximo de resultados (default: 100)\n\n✅ Respuesta: Array de productos filtrados"
+      },
+      "response": []
+    },
+    {
+      "name": "4️⃣ Obtener Producto por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/productos/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", "1"]
+        },
+        "description": "**Obtiene UN producto por su ID.**\n\n🔢 Cambia el `1` en la URL por el ID del producto que quieres consultar.\n\n✅ Respuesta exitosa: HTTP 200 con el producto\n❌ Errores:\n- 404: Producto no encontrado"
+      },
+      "response": []
+    },
+    {
+      "name": "5️⃣ Buscar Productos por Nombre",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/productos/buscar/nombre?q=laptop",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", "buscar", "nombre"],
+          "query": [
+            {
+              "key": "q",
+              "value": "laptop",
+              "description": "Término de búsqueda (case-insensitive)"
+            }
+          ]
+        },
+        "description": "**Busca productos por nombre (búsqueda parcial).**\n\n🔎 Ejemplo: `q=laptop` encuentra:\n- \"Laptop HP\"\n- \"Laptop Dell\"\n- \"Mouse para Laptop\"\n\n✅ La búsqueda NO es case-sensitive (LAptop = laptop)\n✅ Respuesta: Array de productos que coinciden"
+      },
+      "response": []
+    },
+    {
+      "name": "6️⃣ Actualizar Producto",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop HP Pavilion (Actualizado)\",\n  \"precio\": 1799000,\n  \"stock\": 20\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/productos/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", "1"]
+        },
+        "description": "**Actualiza un producto existente.**\n\n🔢 Cambia el `1` en la URL por el ID del producto a actualizar.\n\n📝 Puedes enviar solo los campos que quieres cambiar:\n- Si solo quieres cambiar el precio, envía solo `{\"precio\": 1500000}`\n- Los demás campos quedan igual\n\n✅ Respuesta exitosa: HTTP 200 con el producto actualizado\n❌ Errores:\n- 404: Producto no encontrado\n- 422: Datos inválidos"
+      },
+      "response": []
+    },
+    {
+      "name": "7️⃣ Eliminar Producto (Lógico)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/productos/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["productos", "1"]
+        },
+        "description": "**Elimina un producto (eliminación LÓGICA).**\n\n⚠️ IMPORTANTE: El producto NO se borra de la base de datos.\nSolo se marca como `activo = false`.\n\n🔢 Cambia el `1` en la URL por el ID del producto a eliminar.\n\n✅ Respuesta exitosa: HTTP 200 con mensaje de confirmación\n❌ Errores:\n- 404: Producto no encontrado\n- 400: Producto ya estaba eliminado"
+      },
+      "response": []
+    }
+  ]
+}

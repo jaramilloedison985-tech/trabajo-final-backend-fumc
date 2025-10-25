@@ -311,7 +311,13 @@ trabajo-final-backend-fumc/
 │   ├── config.py                 # Configuración (lee .env)
 │   └── database.py               # Conexión a PostgreSQL
 │
-├── apidog_collections/           # 🆕 Colecciones para ApiDog/Postman
+├── apidog_collections/           # 🆕 Colecciones para ApiDog
+│   ├── 01_Productos.json        # Endpoints de productos
+│   ├── 02_Clientes.json         # Endpoints de clientes
+│   ├── 03_Auditoria.json        # Endpoints de auditoría
+│   └── README.md                # Guía de uso de las colecciones
+│
+├── postman_collections/          # 🆕 Colecciones para Postman
 │   ├── 01_Productos.json        # Endpoints de productos
 │   ├── 02_Clientes.json         # Endpoints de clientes
 │   ├── 03_Auditoria.json        # Endpoints de auditoría
@@ -523,8 +529,8 @@ Documentación alternativa más enfocada en lectura.
 
 ### 🆕 ApiDog / Postman (Recomendado para estudiantes)
 
-**¿Qué es ApiDog?**
-ApiDog es una herramienta profesional para probar APIs. Hemos creado **colecciones pre-configuradas** con TODOS los endpoints listos para usar.
+**¿Qué son estas herramientas?**
+Son herramientas profesionales para probar APIs. Hemos creado **colecciones pre-configuradas** con TODOS los endpoints listos para usar.
 
 **Ventajas**:
 - ✅ No necesitas escribir requests manualmente
@@ -532,16 +538,23 @@ ApiDog es una herramienta profesional para probar APIs. Hemos creado **coleccion
 - ✅ Ejemplos de datos incluidos
 - ✅ Fácil de usar para principiantes
 
+**Elige tu herramienta favorita**:
+
+| Herramienta | Carpeta | Descarga |
+|-------------|---------|----------|
+| 📮 **Postman** | `postman_collections/` | https://www.postman.com/downloads/ |
+| 🐕 **ApiDog** | `apidog_collections/` | https://apidog.com/ |
+
 **Cómo usar las colecciones**:
 
-1. **Instalar ApiDog** (o usar Postman):
-   - ApiDog: https://apidog.com/
-   - Postman: https://www.postman.com/downloads/
+1. **Instalar tu herramienta preferida** (Postman o ApiDog)
 
 2. **Importar las colecciones**:
-   - Abre ApiDog/Postman
+   - Abre Postman o ApiDog
    - Click en "Import"
-   - Busca la carpeta `apidog_collections/` en este proyecto
+   - Busca la carpeta correspondiente:
+     - `postman_collections/` para Postman
+     - `apidog_collections/` para ApiDog
    - Importa los 3 archivos JSON:
      - `01_Productos.json`
      - `02_Clientes.json`
@@ -553,7 +566,9 @@ ApiDog es una herramienta profesional para probar APIs. Hemos creado **coleccion
    - Click en "Send"
    - ¡Listo! Ver respuesta
 
-**📚 Guía Detallada**: Lee `apidog_collections/README.md` para instrucciones completas.
+**📚 Guías Detalladas**:
+- Para Postman: Lee `postman_collections/README.md`
+- Para ApiDog: Lee `apidog_collections/README.md`
 
 ---
 

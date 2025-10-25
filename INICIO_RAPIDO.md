@@ -121,7 +121,24 @@ Tienes **3 opciones** para probar los endpoints:
 5. Click en "Execute"
 6. Ve la respuesta
 
-### Opción 2: ApiDog (Recomendado)
+### Opción 2: Postman (Recomendado)
+
+1. **Instala Postman**: https://www.postman.com/downloads/
+2. **Importa las colecciones**:
+   - Abre Postman
+   - Click en "Import"
+   - Selecciona los archivos de la carpeta `postman_collections/`:
+     - `01_Productos.json`
+     - `02_Clientes.json`
+     - `03_Auditoria.json`
+3. **Probar**:
+   - Selecciona un endpoint
+   - Click en "Send"
+   - Ve la respuesta
+
+**📚 Guía Detallada**: Lee `postman_collections/README.md`
+
+### Opción 3: ApiDog (Alternativa)
 
 1. **Instala ApiDog**: https://apidog.com/
 2. **Importa las colecciones**:
@@ -131,18 +148,9 @@ Tienes **3 opciones** para probar los endpoints:
      - `01_Productos.json`
      - `02_Clientes.json`
      - `03_Auditoria.json`
-3. **Probar**:
-   - Selecciona un endpoint
-   - Click en "Send"
-   - Ve la respuesta
+3. **Probar**: Igual que Postman
 
 **📚 Guía Detallada**: Lee `apidog_collections/README.md`
-
-### Opción 3: Postman
-
-1. **Instala Postman**: https://www.postman.com/downloads/
-2. Importa los mismos archivos JSON de `apidog_collections/`
-3. Usa igual que ApiDog
 
 ---
 
@@ -205,8 +213,9 @@ taskkill /PID <PID> /F
 ## 📚 Documentación Adicional
 
 - **README Completo**: `README.md` (documentación detallada)
+- **Guía Postman**: `postman_collections/README.md`
 - **Guía ApiDog**: `apidog_collections/README.md`
-- **Cambios Recientes**: `CAMBIOS_REALIZADOS.md`
+- **Cambios Recientes**: `CAMBIOS_REALIZADOS.md` (si existe)
 
 ---
 
@@ -219,7 +228,7 @@ taskkill /PID <PID> /F
    ↓
 3. Esperar a que inicie la API (10-30 segundos)
    ↓
-4. Abrir http://localhost:8000/docs O usar ApiDog
+4. Abrir http://localhost:8000/docs O usar Postman/ApiDog
    ↓
 5. Probar endpoints
    ↓
@@ -246,8 +255,8 @@ Marca cada paso que completes:
 - [ ] Archivo `.env` creado y configurado con tu grupo
 - [ ] Primera ejecución con F5 exitosa
 - [ ] Swagger UI abierto en http://localhost:8000/docs
-- [ ] ApiDog instalado (opcional pero recomendado)
-- [ ] Colecciones importadas en ApiDog
+- [ ] Postman o ApiDog instalado (opcional pero recomendado)
+- [ ] Colecciones importadas en tu herramienta preferida
 - [ ] Primer endpoint probado exitosamente
 
 ---
@@ -261,7 +270,7 @@ Una vez que tu API esté corriendo:
    - `app/models/cliente.py` - Tabla de clientes
    - `app/models/auditoria.py` - Sistema de auditoría
 
-2. **Prueba todos los endpoints** usando ApiDog o Swagger UI
+2. **Prueba todos los endpoints** usando Postman, ApiDog o Swagger UI
 
 3. **Experimenta**:
    - Crea productos
