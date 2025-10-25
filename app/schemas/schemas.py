@@ -7,7 +7,7 @@ Pydantic se encarga de validar automáticamente que los datos cumplan
 con las reglas definidas aquí.
 """
 
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from typing import Optional
 from datetime import datetime
 from decimal import Decimal
@@ -27,41 +27,43 @@ class ProductoBase(BaseModel):
         min_length=3,
         max_length=200,
         description="Nombre del producto",
-        example="Laptop HP Pavilion 15"
+        json_schema_extra={"example": "Laptop HP Pavilion 15"},
     )
     descripcion: Optional[str] = Field(
         None,  # None = opcional
         max_length=2000,
         description="Descripción detallada del producto",
-        example="Laptop con procesador Intel Core i5, 8GB RAM, 256GB SSD"
+        json_schema_extra={
+            "example": "Laptop con procesador Intel Core i5, 8GB RAM, 256GB SSD"
+        },
     )
     precio: Decimal = Field(
         ...,
         gt=0,  # Greater than (mayor que) 0
-        decimal_places=2,
         description="Precio en pesos colombianos",
-        example=1500000.00
+        json_schema_extra={"example": 1500000.00},
     )
     stock: int = Field(
         default=0,
         ge=0,  # Greater or equal (mayor o igual) a 0
         description="Cantidad disponible en inventario",
-        example=10
+        json_schema_extra={"example": 10},
     )
     categoria: Optional[str] = Field(
         None,
         max_length=100,
         description="Categoría del producto",
-        example="Electrónica"
+        json_schema_extra={"example": "Electrónica"},
     )
     imagen_url: Optional[str] = Field(
         None,
         max_length=500,
         description="URL de la imagen del producto",
-        example="https://ejemplo.com/laptop.jpg"
+        json_schema_extra={"example": "https://ejemplo.com/laptop.jpg"},
     )
 
-    @validator('precio')
+    @field_validator("precio")
+    @classmethod
     def validar_precio(cls, v):
         """
         Validación personalizada para el precio.
@@ -73,7 +75,8 @@ class ProductoBase(BaseModel):
             raise ValueError('El precio es demasiado alto')
         return v
 
-    @validator('nombre')
+    @field_validator("nombre")
+    @classmethod
     def validar_nombre(cls, v):
         """Validación personalizada para el nombre"""
         if not v or v.strip() == '':
@@ -102,7 +105,7 @@ class ProductoUpdate(BaseModel):
     """
     nombre: Optional[str] = Field(None, min_length=3, max_length=200)
     descripcion: Optional[str] = Field(None, max_length=2000)
-    precio: Optional[Decimal] = Field(None, gt=0, decimal_places=2)
+    precio: Optional[Decimal] = Field(None, gt=0)
     stock: Optional[int] = Field(None, ge=0)
     categoria: Optional[str] = Field(None, max_length=100)
     imagen_url: Optional[str] = Field(None, max_length=500)
@@ -141,46 +144,48 @@ class ClienteBase(BaseModel):
         min_length=3,
         max_length=100,
         description="Nombre completo del cliente",
-        example="Juan Pérez García"
+        json_schema_extra={"example": "Juan Pérez García"},
     )
     email: EmailStr = Field(  # EmailStr valida automáticamente el formato de email
         ...,
         description="Correo electrónico del cliente",
-        example="juan.perez@example.com"
+        json_schema_extra={"example": "juan.perez@example.com"},
     )
     telefono: Optional[str] = Field(
         None,
         max_length=20,
         description="Número de teléfono",
-        example="+57 300 123 4567"
+        json_schema_extra={"example": "+57 300 123 4567"},
     )
     direccion: Optional[str] = Field(
         None,
         max_length=500,
         description="Dirección de entrega",
-        example="Calle 123 #45-67, Apto 801"
+        json_schema_extra={"example": "Calle 123 #45-67, Apto 801"},
     )
     ciudad: Optional[str] = Field(
         None,
         max_length=100,
         description="Ciudad de residencia",
-        example="Medellín"
+        json_schema_extra={"example": "Medellín"},
     )
     documento: Optional[str] = Field(
         None,
         max_length=20,
         description="Número de documento de identidad",
-        example="1234567890"
+        json_schema_extra={"example": "1234567890"},
     )
 
-    @validator('nombre')
+    @field_validator("nombre")
+    @classmethod
     def validar_nombre_cliente(cls, v):
         """Validación del nombre del cliente"""
         if not v or v.strip() == '':
             raise ValueError('El nombre no puede estar vacío')
         return v.strip()
 
-    @validator('documento')
+    @field_validator("documento")
+    @classmethod
     def validar_documento(cls, v):
         """Validación del documento"""
         if v and not v.replace(' ', '').replace('-', '').isdigit():

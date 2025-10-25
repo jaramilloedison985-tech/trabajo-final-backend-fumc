@@ -71,5 +71,14 @@
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+
+  // Configuración de Pylance para desactivar advertencias específicas
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportUntypedFunctionDecorator": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownVariableType": "none",
+    "reportUnknownParameterType": "none",
+    "reportMissingParameterType": "none"
   }
 }

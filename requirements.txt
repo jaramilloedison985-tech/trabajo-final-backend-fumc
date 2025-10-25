@@ -16,5 +16,8 @@ python-dotenv==1.0.0
 # Validación de datos (incluido con FastAPI pero especificamos versión)
 pydantic==2.5.3
 
+# Validador de emails para Pydantic
+email-validator==2.1.1
+
 # Soporte para settings con Pydantic
 pydantic-settings==2.1.0
