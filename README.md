@@ -392,7 +392,7 @@ La base de datos está alojada en la nube:
 - **Host**: `postgres.corvitmedellin.com:5432`
 - **Base de datos**: `fumc_db`
 - **Usuario**: `fumc_user`
-- **Contraseña**: `FUMC*Backend.Oct-2025`
+- **Contraseña**: ``
 
 ### Tablas
 
